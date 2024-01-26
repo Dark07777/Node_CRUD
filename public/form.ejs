@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <ul>
+    <% obj.forEach(function(justOne) { %>
+      <li>
+        Id - <strong>
+          <%= justOne.theaterId %>
+        </strong> <br />
+        City - <strong>
+          <%= justOne.location.address.city %>
+        </strong> / State -
+        <strong>
+          <%= justOne.location.address.state %>
+        </strong> / Zip code -
+        <strong>
+          <%= justOne.location.address.zipcode %>
+        </strong> / Street -
+        <strong>
+          <%= justOne.location.address.street1 %>
+        </strong> <br />
+        <br />
+      </li>
+      <% }); %>
+  </ul> 
+  <!-- <form action="/addName" method="post"> -->
+  <input type="name" name="name" class="usName" placeholder="write your name" /><br /><br />
+  <input type="number" name="age" class="usAge" placeholder="write your age" /><br /><br />
+  <input type="email" name="email" class="usEmail" />
+  <input type="submit" class="btn" value="" />
+  <!-- </form> -->
+
+  <script src="script.js"></script>
+</body>
+
+</html>
