@@ -2,44 +2,76 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <table>
-    <tr>
-      <td>Name</td>
-      <td>Price</td>
-      <td>Image</td>
-      <td>Update</td>
-      <td>Delete</td>
-    </tr>
-    <% obj.forEach(function(justOne) { %>
-      <tr>
-        <td>
-          <%= justOne.name %>
-        </td>
-        <td>
-          <%= justOne.price %>
-        </td>
-        <td><img src="<%= justOne.image %>" alt="" /></td>
-        <td><a class="update" href="update/<%= justOne._id %>">Update</a></td>
-        <td><a class="delete" href="delete/<%= justOne._id %>">Delete</a></td>
-      </tr>
-      <% }); %>
-  </table>
-  <form action="/addName" method="post">
-    <input id="PrName" type="text" required name="name" placeholder="Name" /><br /><br />
-    <input id="PrPrice" type="number" name="price" placeholder="Price" /><br /><br />
-    <input id="PrImage" type="text" name="image" placeholder="Image" /><br /><br />
-    <input id="PrUUID" type="number" name="uuid" placeholder="UUID" /><br /><br />
-    <input id="PrDes" type="text" name="description" placeholder="Description" /><br /><br />
-    <input id="id" type="hidden" name="id" /><br /><br />
-    <input type="submit" onclick="getVal()" />
+
+ <form action="/addName" method="post">
+    <input id="PrName" type="text" required name="name" placeholder="Name"><br><br>
+    <input id="PrPrice" type="number" name="price" placeholder="Price"><br><br>
+    <input id="PrImage" type="text" name="image" placeholder="Image"><br><br>
+    <input type="text" name="owner" placeholder="Owner"><br><br>
+    <input type="number" name="battery" placeholder="Battery"><br><br>
+    <input type="text" name="color" placeholder="Color"><br><br>
+    <input id="id" type="hidden" name="id"><br><br>
+    <input type="submit" onclick="getVal()">
   </form>
+
+
+
+
+  
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Owner</th>
+          <th>Battery</th>
+          <th>Color</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+        <% obj.forEach(function(justOne) { %>
+          <tr>
+            <td>
+              <%= justOne.name %>
+            </td>
+            <td>
+              <%= justOne.price %> $
+            </td>
+            <td><img src="<%= justOne.image %>" alt="" /></td>
+            <td>
+              <%= justOne.owner %>
+            </td>
+            <td>
+              <%= justOne.battery %> %
+            </td>
+            <td>
+              <%= justOne.color %>
+            </td>
+            <td><a class="update" href="update/<%= justOne._id %>">Update</a></td>
+            <td><a class="delete" href="delete/<%= justOne._id %>">Delete</a></td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+
+  </div>
+
+
+
+ 
 
   <script src="script.js"></script>
 </body>

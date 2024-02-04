@@ -5,7 +5,7 @@ var app = express();
 const { ObjectId } = require('mongoose').Types;
 
 const mongoose = require('mongoose');
-const connectionString = 'mongodb+srv://geghamshagoyany:geghamshagoyany@cluster0.zfgsp1x.mongodb.net/Tumo_product';
+const connectionString = 'mongodb+srv://geghamshagoyany:geghamshagoyany@cluster0.zfgsp1x.mongodb.net/Tumo_products';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -35,8 +35,9 @@ app.post('/addName', async (req, res) => {
     const name = req.body.name;
     const price = req.body.price;
     const image = req.body.image;
-    const des = req.body.description;
-    const uuid = req.body.uuid;
+    const owner = req.body.owner
+    const battery = req.body.battery
+    const color = req.body.color
     mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connection error:'));
@@ -47,10 +48,11 @@ app.post('/addName', async (req, res) => {
                 name: name,
                 price: price,
                 image: image,
-                description: des,
-                uuid: uuid
+                owner:owner,
+                battery:battery,
+                color:color
             })
-            res.redirect('/')
+            res.json(result);
         } catch (error) {
             console.error('Error retrieving movies:', error);
         } finally {
@@ -67,10 +69,7 @@ app.get("/delete/:id", function (req, res) {
     db.once('open', async () => {
         try {
             let result = await mongoose.connection.db.collection('products').deleteOne({_id: new ObjectId(id)});
-            // res.render('../public/update.ejs', {
-            //     obj: result
-            // });
-            res.redirect('/')
+            res.json(result);
         } catch (error) {
             console.error('Error retrieving movies:', error);
         } finally {
@@ -103,8 +102,9 @@ app.post("/updateData", function (req, res) {
     const name = req.body.name;
     const price = req.body.price;
     const image = req.body.image;
-    const des = req.body.description;
-    const uuid = req.body.uuid;
+    const owner = req.body.owner
+    const battery = req.body.battery
+    const color = req.body.color
     const id = req.body.id;
 
     mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -118,7 +118,7 @@ app.post("/updateData", function (req, res) {
         try {
             let result = await mongoose.connection.db.collection('products').updateOne(
                 { _id: new ObjectId(id) },
-                { $set: { name: name, price: price, image: image, description: des, uuid: uuid } }
+                { $set: { name: name, price: price, image: image, owner:owner,battery:battery,color:color} }
             );
 
             res.json(result);
